@@ -1,66 +1,38 @@
-## Foundry
+# MToken and Staking Contract
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Overview
 
-Foundry consists of:
+This repository contains the smart contracts for an ERC20 token called **MToken** and a **Staking Contract** where users can stake Ether (ETH) and earn rewards in **MToken**.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+### Key Features:
 
-## Documentation
+- **MToken**: An ERC20 token given as rewards for staking.
+- **Staking Contract**: Allows users to stake Ether and earn MToken rewards over time.
+- **Rewards**: Users earn rewards in the form of MTokens based on the amount of ETH they stake and the duration they stake for.
+- **Withdrawal Locking**: Users can only withdraw staked ETH after a specified lock period (e.g., 1 hour).
 
-https://book.getfoundry.sh/
+## Contracts
 
-## Usage
+### MToken (ERC20 Token)
 
-### Build
+The **MToken** is a simple ERC20 token that is used as a reward for users who stake their ETH in the **Staking Contract**.
 
-```shell
-$ forge build
-```
+#### Key Functions:
 
-### Test
+- `mint(address to, uint amount)`: Mints new MTokens to the specified address.
 
-```shell
-$ forge test
-```
+### StakingContract
 
-### Format
+The **StakingContract** allows users to stake their Ether and earn MToken rewards.
 
-```shell
-$ forge fmt
-```
+#### Key Functions:
 
-### Gas Snapshots
+- `stake()`: Allows users to stake Ether. Users receive MToken rewards for the amount and time they stake.
+- `unstake(uint _amount)`: Allows users to unstake their Ether. The amount becomes pending for withdrawal after the lock period (e.g., 1 hour).
+- `getRewards(address _address)`: Calculates the total rewards a user has accumulated, based on the time staked.
+- `claimRewards()`: Allows users to claim their accumulated MToken rewards.
+- `withdraw()`: Allows users to withdraw the ETH that has completed the lock period.
 
-```shell
-$ forge snapshot
-```
+#### Lock Periods:
 
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- After unstaking, users need to wait for a lock period before withdrawing their ETH. This prevents farming and incentivizes longer-term staking.
