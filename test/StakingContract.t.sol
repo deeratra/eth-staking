@@ -6,7 +6,4 @@ import {StakingContract} from "../src/StakingContract.sol";
 
 contract StakingContractTest is Test {
     StakingContract stakingContract;
-    
-
-
 }

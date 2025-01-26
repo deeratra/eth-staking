@@ -6,17 +6,18 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol"; // This is an alias or r
 contract MToken is ERC20 {
     address stakingContract;
     address owner;
+
     constructor() ERC20("MToken", "MTK") {
         // stakingContract = _stakingContract;
         owner = msg.sender;
     }
 
-    function mint(address to, uint amount) public {
+    function mint(address to, uint256 amount) public {
         require(msg.sender == stakingContract, "only staking contract can mint");
         _mint(to, amount);
     }
 
-    function burn(address from, uint amount) public {
+    function burn(address from, uint256 amount) public {
         _burn(from, amount);
     }
 

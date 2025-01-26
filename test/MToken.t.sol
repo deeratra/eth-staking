@@ -11,7 +11,7 @@ contract MTokenTest is Test {
         mToken = new MToken();
     }
 
-    function testInitialSupply() public view{
+    function testInitialSupply() public view {
         assert(mToken.totalSupply() == 0);
     }
 
@@ -31,6 +31,4 @@ contract MTokenTest is Test {
         mToken.mint(0x96959E7417E11A84f0A9032fE3748F300F6978C5, 100);
         assert(mToken.balanceOf(0x96959E7417E11A84f0A9032fE3748F300F6978C5) == 100);
     }
-
-
 }
